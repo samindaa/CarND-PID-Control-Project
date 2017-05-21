@@ -3,6 +3,7 @@
 #include "json.hpp"
 #include "PID.h"
 #include <math.h>
+#include <fstream>
 
 // for convenience
 using json = nlohmann::json;
@@ -33,14 +34,17 @@ int main() {
   PID pid_steer_value;
   PID pid_throttle;
   // TODO: Initialize the pid variable.
-  const double target_speed = 30; // 30 mph
-  const double Kp_steer_value = 0.5, Ki_steer_value = 0.0001, Kd_steer_value = 8.0;
-  const double Kp_throttle = 0.5, Ki_throttle = 0, Kd_throttle = 3.0;
+  const double target_speed = 80; // XXX mph
+  //const double Kp_steer_value = 0.5, Ki_steer_value = 0.0001, Kd_steer_value = 8.0;
+  const double Kp_steer_value = 0.115, Ki_steer_value = 0.00001, Kd_steer_value = 8.0;
+  const double Kp_throttle = 2.0, Ki_throttle = 0.0001, Kd_throttle = 1.0;
 
   pid_steer_value.Init(Kp_steer_value, Ki_steer_value, Kd_steer_value);
   pid_throttle.Init(Kp_throttle, Ki_throttle, Kd_throttle);
 
-  h.onMessage([&pid_steer_value, &pid_throttle, target_speed](uWS::WebSocket<uWS::SERVER> ws,
+  std::ofstream ofs_output("pid_output");
+
+  h.onMessage([&pid_steer_value, &pid_throttle, target_speed, &ofs_output](uWS::WebSocket<uWS::SERVER> ws,
                                                               char *data,
                                                               size_t length,
                                                               uWS::OpCode opCode) {
@@ -79,14 +83,17 @@ int main() {
 
 
           // DEBUG
-          std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
+          //std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
+
+          //ofs_output << target_speed << " " << speed << " " << cte << std::endl;
+          //ofs_output.flush();
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
           //msgJson["throttle"] = 0.3;
           msgJson["throttle"] = throttle;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          std::cout << msg << std::endl;
+          //std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
         }
       } else {
