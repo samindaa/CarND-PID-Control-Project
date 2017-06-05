@@ -85,8 +85,8 @@ int main() {
           // DEBUG
           //std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
 
-          //ofs_output << target_speed << " " << speed << " " << cte << std::endl;
-          //ofs_output.flush();
+          ofs_output << target_speed << " " << speed << " " << cte << std::endl;
+          ofs_output.flush();
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;

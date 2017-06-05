@@ -1,8 +1,24 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
----
 
+## Writeup (Saminda Abeyruwan)
+
+I have opted to tune the PID parameters for both cte and speed manually. I have tried twiddle, and [CMA-ES](https://www.lri.fr/~hansen/cmaesintro.html)
+ as alternative methods. I have always favoured using CMA-ES for optimization problems, and find the best 
+ PID parameters for cte and speed have been converted as such. Since the simulator does not provide an option
+ to reset the current simulation if the car drives off the road, I have faced with difficulties to define the end-of-episode
+ or the termination of the current epoch. I have tried many heuristics, but, did not help.
+ 
+ Therefore, I have used manual PID tuning based on the guidelines provided in:
+ 
+ * [Robotics](https://robotics.stackexchange.com/questions/167/what-are-good-strategies-for-tuning-pid-loops)
+ * [Wikipedia](https://en.wikipedia.org/wiki/PID_controller)
+ 
+ I have set the target speed at 80 MPH. 
+ 
+ ![speed][speed.png]
+ 
 ## Dependencies
 
 * cmake >= 3.5
