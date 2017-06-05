@@ -17,7 +17,7 @@ I have opted to tune the PID parameters for both cte and speed manually. I have 
  
  I have set the target speed at 80 MPH. 
  
- ![speed][speed.png]
+ ![speed](speed.png)
  
 ## Dependencies
 
