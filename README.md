@@ -21,7 +21,7 @@ I have opted to tune the PID parameters for both cte and speed manually. I have 
  
  The parameter tuning for CTE PID controller was bit involved. I have started with tuning P parameter
  until the car starts oscillating. Then, I have tune the I and D parameters as mentioned
- in Robotics and Wikipedia articles. I have stopped the process when the car is to drive
+ in Robotics and Wikipedia articles. I have stopped the process when the car was able to drive
  indefinitely at 80 MPH on the road. 
  
  ![cte](cte.png)
